@@ -5,9 +5,11 @@ const container = document.createElement("div");
 const container2 = document.createElement("div");
 const container3 = document.createElement("div");
 const container4 = document.createElement("div");
+const container5 = document.createElement("div");
 container2.style.display = "none";
 container3.style.display = "none";
 container4.style.display = "none";
+container5.style.display = "none";
 
 navbar.after(container);
 container.classList.add("container");
@@ -174,9 +176,10 @@ document.querySelector(".price-filter").addEventListener("click", async () => {
   container.style.display = "none";
   container2.style.display = "none";
   container3.style.display = "none";
-  container4.style.display = "flex";
-  container4.style.flexWrap = "wrap";
-  navbar.after(container4);
+  container4.style.display = "none";
+  container5.style.display = "flex";
+  container5.style.flexWrap = "wrap";
+  navbar.after(container5);
   let val = document.querySelector(".title-filter").textContent;
   fetch(baseURL + "products?sortBy=price&order=asc")
     .then((data) => data.json())
@@ -194,10 +197,22 @@ document.querySelector(".price-filter").addEventListener("click", async () => {
         pTitle.textContent = product.title;
         pPrice.textContent = product.price;
 
-        container4.append(productCard);
+        container5.append(productCard);
         productCard.append(pImage);
         productCard.append(pTitle);
         productCard.append(pPrice);
       });
     });
+});
+
+//Home button
+const home = document.querySelector(".home");
+home.addEventListener("click", () => {
+  container2.style.display = "none";
+  container3.style.display = "none";
+  container4.style.display = "none";
+  container5.style.display = "none";
+
+  container.style.display = "flex";
+  container.classList.add("container");
 });
