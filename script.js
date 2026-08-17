@@ -4,8 +4,10 @@ let navbar = document.querySelector(".navbar");
 const container = document.createElement("div");
 const container2 = document.createElement("div");
 const container3 = document.createElement("div");
+const container4 = document.createElement("div");
 container2.style.display = "none";
 container3.style.display = "none";
+container4.style.display = "none";
 
 navbar.after(container);
 container.classList.add("container");
@@ -131,6 +133,39 @@ category.addEventListener("click", async () => {
 
         container3.appendChild(categoryCard);
         categoryCard.append(cName);
+      });
+    });
+});
+
+//Sort
+document.querySelector(".title-filter").addEventListener("click", async () => {
+  container.style.display = "none";
+  container2.style.display = "none";
+  container3.style.display = "none";
+  container4.style.display = "flex";
+  container4.style.flexWrap = "wrap";
+  navbar.after(container4);
+  let val = document.querySelector(".title-filter").textContent;
+  fetch(baseURL + "products?sortBy=title&order=asc")
+    .then((data) => data.json())
+    .then((data) => {
+      data.products.map((product) => {
+        let productCard = document.createElement("div");
+        let pImage = document.createElement("img");
+        let pTitle = document.createElement("p");
+        let pPrice = document.createElement("span");
+
+        productCard.classList.add("product-card");
+        productCard.setAttribute("data-val", product.id);
+
+        pImage.setAttribute("src", product.thumbnail);
+        pTitle.textContent = product.title;
+        pPrice.textContent = product.price;
+
+        container4.append(productCard);
+        productCard.append(pImage);
+        productCard.append(pTitle);
+        productCard.append(pPrice);
       });
     });
 });
