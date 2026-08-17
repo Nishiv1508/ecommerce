@@ -81,6 +81,9 @@ sbtn.addEventListener("click", async (e) => {
   );
   const data = await products.json();
   container.style.display = "none";
+  container3.style.display = "none";
+  container4.style.display = "none";
+  container5.style.display = "none";
   container2.style.display = "flex";
   container2.style.flexWrap = "wrap";
   container2.style.gap = "10%";
@@ -118,6 +121,8 @@ category.addEventListener("click", async () => {
     .then((data) => {
       container.style.display = "none";
       container2.style.display = "none";
+      container4.style.display = "none";
+      container5.style.display = "none";
       container3.style.display = "flex";
       container3.style.flexWrap = "wrap";
       container3.style.gap = "10%";
@@ -144,6 +149,7 @@ document.querySelector(".title-filter").addEventListener("click", async () => {
   container.style.display = "none";
   container2.style.display = "none";
   container3.style.display = "none";
+  container5.style.display = "none";
   container4.style.display = "flex";
   container4.style.flexWrap = "wrap";
   navbar.after(container4);
