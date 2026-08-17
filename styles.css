@@ -8,4 +8,10 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  gap: 5%;
+}
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
 }
