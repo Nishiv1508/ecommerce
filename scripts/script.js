@@ -4,6 +4,7 @@ let navbar = document.querySelector(".navbar");
 let section = document.querySelector(".sec");
 let pagination = document.querySelector(".pagination");
 let results = document.querySelector(".results");
+const pg = document.querySelectorAll(".pagination");
 const container = document.createElement("div");
 const container2 = document.createElement("div");
 const container3 = document.createElement("div");

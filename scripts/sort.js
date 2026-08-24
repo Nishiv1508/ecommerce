@@ -1,17 +1,15 @@
-document.querySelector(".title-filter").addEventListener("click", async () => {
-  container.style.display = "none";
+function getDataByOrder(filter, type) {
+  container.style.display = "flex";
+  container.classList.add("container");
   container2.style.display = "none";
   container3.style.display = "none";
-  container5.style.display = "none";
   productPage.style.display = "none";
   pagination.classList.remove("hide");
-  container4.style.display = "flex";
-  container4.style.flexWrap = "wrap";
-  section.appendChild(container4);
-  let val = document.querySelector(".title-filter").textContent;
-  fetch(baseURL + "products?sortBy=title&order=asc")
+  container.replaceChildren();
+  fetch(baseURL + `products?sortBy=${filter}&order=${type}`)
     .then((data) => data.json())
     .then((data) => {
+      console.log(data);
       data.products.map((product) => {
         let productCard = document.createElement("div");
         let pImage = document.createElement("img");
@@ -25,44 +23,76 @@ document.querySelector(".title-filter").addEventListener("click", async () => {
         pTitle.textContent = product.title;
         pPrice.textContent = product.price;
 
-        container4.append(productCard);
+        container.appendChild(productCard);
         productCard.append(pImage);
         productCard.append(pTitle);
         productCard.append(pPrice);
       });
+    })
+    .then(() => {
+      pg.forEach((li) => {
+        li.addEventListener("click", (e) => {
+          li.classList.add("active");
+          let pageAnchor = e.target;
+          let pageNum = pageAnchor.textContent;
+          fetch(
+            baseURL +
+              `products/?sortBy=${filter}&order=${type}&limit=30&skip=` +
+              (pageNum - 1) * 30,
+          )
+            .then((data) => data.json())
+            .then((data) => {
+              container.replaceChildren();
+              data.products.map((product) => {
+                let productCard = document.createElement("div");
+                let pImage = document.createElement("img");
+                let pTitle = document.createElement("p");
+                let pPrice = document.createElement("span");
+
+                productCard.classList.add("product-card");
+                productCard.setAttribute("data-val", product.id);
+
+                pImage.setAttribute("src", product.thumbnail);
+                pTitle.textContent = product.title;
+                pPrice.textContent = product.price;
+
+                container.appendChild(productCard);
+                productCard.append(pImage);
+                productCard.append(pTitle);
+                productCard.append(pPrice);
+              });
+            })
+            .then(() => {
+              productPageFunc();
+            });
+        });
+      });
+    })
+    .then(() => {
+      productPageFunc();
     });
+}
+
+document.querySelector(".title-asc").addEventListener("click", () => {
+  getDataByOrder("title", "asc");
 });
 
-document.querySelector(".price-filter").addEventListener("click", async () => {
-  container.style.display = "none";
-  container2.style.display = "none";
-  container3.style.display = "none";
-  container4.style.display = "none";
-  pagination.classList.remove("hide");
-  container5.style.display = "flex";
-  container5.style.flexWrap = "wrap";
-  section.appendChild(container5);
-  let val = document.querySelector(".title-filter").textContent;
-  fetch(baseURL + "products?sortBy=price&order=asc")
-    .then((data) => data.json())
-    .then((data) => {
-      data.products.map((product) => {
-        let productCard = document.createElement("div");
-        let pImage = document.createElement("img");
-        let pTitle = document.createElement("p");
-        let pPrice = document.createElement("span");
+document.querySelector(".price-asc").addEventListener("click", () => {
+  getDataByOrder("price", "asc");
+});
 
-        productCard.classList.add("product-card");
-        productCard.setAttribute("data-val", product.id);
+document.querySelector(".price-desc").addEventListener("click", () => {
+  getDataByOrder("price", "desc");
+});
 
-        pImage.setAttribute("src", product.thumbnail);
-        pTitle.textContent = product.title;
-        pPrice.textContent = product.price;
+document.querySelector(".title-desc").addEventListener("click", () => {
+  getDataByOrder("title", "desc");
+});
 
-        container5.append(productCard);
-        productCard.append(pImage);
-        productCard.append(pTitle);
-        productCard.append(pPrice);
-      });
-    });
+document.querySelector(".rating-asc").addEventListener("click", () => {
+  getDataByOrder("rating", "asc");
+});
+
+document.querySelector(".rating-desc").addEventListener("click", () => {
+  getDataByOrder("rating", "desc");
 });
