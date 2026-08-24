@@ -133,8 +133,6 @@ const home = document.querySelector(".home");
 home.addEventListener("click", () => {
   container2.style.display = "none";
   container3.style.display = "none";
-  container4.style.display = "none";
-  container5.style.display = "none";
   productPage.style.display = "none";
   pagination.classList.remove("hide");
 

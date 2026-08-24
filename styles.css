@@ -26,6 +26,7 @@
   background-color: black;
   padding: 50px;
   margin: 5px 20px;
+  cursor: pointer;
 }
 
 .pagination {
