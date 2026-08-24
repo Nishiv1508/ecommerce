@@ -160,6 +160,7 @@ function productPageFunc() {
           let p_stock = document.createElement("p");
           let p_rating = document.createElement("p");
           let p_warranty = document.createElement("p");
+          let p_deleteButton = document.createElement("button");
 
           container.style.display = "none";
           container2.style.display = "none";
@@ -175,6 +176,7 @@ function productPageFunc() {
           dataContainer.style.flexDirection = "column";
           dataContainer.style.gap = "20px";
           dataContainer.style.marginTop = "10%";
+          p_deleteButton.style.width = "100px";
 
           p_image.setAttribute("src", data.thumbnail);
           p_title.textContent = data.title;
@@ -183,6 +185,7 @@ function productPageFunc() {
           p_stock.textContent = "Stock: " + data.stock;
           p_rating.textContent = "Rating: " + data.rating;
           p_warranty.textContent = "Warranty: " + data.warrantyInformation;
+          p_deleteButton.textContent = "Delete";
 
           productPage.replaceChildren();
           section.appendChild(productPage);
@@ -195,6 +198,18 @@ function productPageFunc() {
           dataContainer.append(p_stock);
           dataContainer.append(p_rating);
           dataContainer.append(p_warranty);
+          dataContainer.append(p_deleteButton);
+
+          p_deleteButton.addEventListener("click", () => {
+            fetch("https://dummyjson.com/products/" + id, {
+              method: "DELETE",
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                alert("Item Deleted | isDeleted: " + res.isDeleted);
+                console.log(res);
+              });
+          });
         });
     }),
   );
