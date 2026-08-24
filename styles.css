@@ -26,3 +26,11 @@
   padding: 50px;
   margin: 5px 20px;
 }
+
+.pagination {
+  margin: 20px 37%;
+}
+
+.hide {
+  display: none;
+}
