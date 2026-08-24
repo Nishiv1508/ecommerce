@@ -73,7 +73,7 @@ pg.forEach((li) => {
                   "Warranty: " + data.warrantyInformation;
 
                 productPage.replaceChildren();
-                navbar.after(productPage);
+                section.appendChild(productPage);
                 productPage.append(imageContainer);
                 imageContainer.append(p_image);
                 productPage.append(dataContainer);
