@@ -9,6 +9,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
+  width: 100%;
 }
 
 .container2 {
@@ -33,4 +34,9 @@
 
 .hide {
   display: none;
+}
+
+.search-results {
+  border: 1px solid blue;
+  margin: 0;
 }

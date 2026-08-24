@@ -7,7 +7,7 @@ document.querySelector(".title-filter").addEventListener("click", async () => {
   pagination.classList.remove("hide");
   container4.style.display = "flex";
   container4.style.flexWrap = "wrap";
-  navbar.after(container4);
+  section.appendChild(container4);
   let val = document.querySelector(".title-filter").textContent;
   fetch(baseURL + "products?sortBy=title&order=asc")
     .then((data) => data.json())
@@ -41,7 +41,7 @@ document.querySelector(".price-filter").addEventListener("click", async () => {
   pagination.classList.remove("hide");
   container5.style.display = "flex";
   container5.style.flexWrap = "wrap";
-  navbar.after(container5);
+  section.appendChild(container5);
   let val = document.querySelector(".title-filter").textContent;
   fetch(baseURL + "products?sortBy=price&order=asc")
     .then((data) => data.json())

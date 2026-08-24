@@ -15,7 +15,7 @@ category.addEventListener("click", async () => {
       container3.style.display = "flex";
       container3.style.flexWrap = "wrap";
       container3.style.gap = "10%";
-      navbar.after(container3);
+      section.appendChild(container3);
 
       data.map((category) => {
         let categoryCard = document.createElement("div");
