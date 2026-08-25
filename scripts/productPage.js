@@ -158,12 +158,7 @@ function productPageFunc() {
                   return res.json();
                 })
                 .then((data) => {
-                  alert(
-                    "Product Updated | id: " +
-                      data.id +
-                      " | Updated Name: " +
-                      data.title,
-                  );
+                  alert("Product Updated | id: " + data.id);
                   console.log(data);
                 })
                 .catch((err) => console.log(err));
