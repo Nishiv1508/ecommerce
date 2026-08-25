@@ -4,6 +4,7 @@ function getDataByOrder(filter, type) {
   container2.style.display = "none";
   container3.style.display = "none";
   productPage.style.display = "none";
+  productForm.style.display = "none";
   pagination.classList.remove("hide");
   container.replaceChildren();
   fetch(baseURL + `products?sortBy=${filter}&order=${type}`)
