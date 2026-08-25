@@ -4,7 +4,13 @@ const sbtn = document.querySelector(".search-button");
 function handleChange(e) {
   results.replaceChildren();
   fetch(baseURL + "products/search?q=" + e.target.value + "&limit=5")
-    .then((data) => data.json())
+    .then((res) => {
+      if (!res.ok) {
+        alert("Something went wrong");
+        return;
+      }
+      return res.json();
+    })
     .then((data) => data.products)
     .then((products) => {
       products.map((product) => {
@@ -33,6 +39,7 @@ function handleChange(e) {
               container2.style.flexWrap = "wrap";
               container2.style.gap = "10%";
               container2.classList.add("container");
+              container2.replaceChildren();
               section.appendChild(container2);
 
               data.products.map((product) => {
@@ -112,10 +119,12 @@ function handleChange(e) {
               //     }),
               //   );
               productPageFunc();
-            });
+            })
+            .catch((err) => console.log(err));
         });
       });
-    });
+    })
+    .catch((err) => console.log(err));
 }
 
 function debounce(handleChange, delay) {
@@ -142,40 +151,45 @@ section.addEventListener("click", () => {
 
 sbtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  const products = await fetch(
-    baseURL + "products/search?q=" + searchBox.value,
-  );
-  const data = await products.json();
-  container.style.display = "none";
-  container3.style.display = "none";
-  container4.style.display = "none";
-  container5.style.display = "none";
-  productPage.style.display = "none";
-  pagination.classList.add("hide");
-  container2.style.display = "flex";
-  container2.style.flexWrap = "wrap";
-  container2.style.gap = "10%";
-  container2.classList.add("container");
-  section.appendChild(container2);
+  try {
+    const products = await fetch(
+      baseURL + "products/search?q=" + searchBox.value,
+    );
+    const data = await products.json();
+    container.style.display = "none";
+    container3.style.display = "none";
+    container4.style.display = "none";
+    container5.style.display = "none";
+    productPage.style.display = "none";
+    pagination.classList.add("hide");
+    container2.style.display = "flex";
+    container2.style.flexWrap = "wrap";
+    container2.style.gap = "10%";
+    container2.classList.add("container");
+    container2.replaceChildren();
+    section.appendChild(container2);
 
-  data.products.map((product) => {
-    let productCard = document.createElement("div");
-    let pImage = document.createElement("img");
-    let pTitle = document.createElement("p");
-    let pPrice = document.createElement("span");
+    data.products.map((product) => {
+      let productCard = document.createElement("div");
+      let pImage = document.createElement("img");
+      let pTitle = document.createElement("p");
+      let pPrice = document.createElement("span");
 
-    productCard.classList.add("product-card");
-    productCard.setAttribute("data-val", product.id);
+      productCard.classList.add("product-card");
+      productCard.setAttribute("data-val", product.id);
 
-    pImage.setAttribute("src", product.thumbnail);
-    pTitle.textContent = product.title;
-    pPrice.textContent = product.price;
+      pImage.setAttribute("src", product.thumbnail);
+      pTitle.textContent = product.title;
+      pPrice.textContent = product.price;
 
-    container2.appendChild(productCard);
-    productCard.append(pImage);
-    productCard.append(pTitle);
-    productCard.append(pPrice);
+      container2.appendChild(productCard);
+      productCard.append(pImage);
+      productCard.append(pTitle);
+      productCard.append(pPrice);
 
-    productPageFunc();
-  });
+      productPageFunc();
+    });
+  } catch (err) {
+    alert("Something went wrong");
+  }
 });

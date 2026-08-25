@@ -23,7 +23,13 @@ section.appendChild(container);
 container.classList.add("container");
 
 fetch(baseURL + "products")
-  .then((data) => data.json())
+  .then((res) => {
+    if (!res.ok) {
+      alert("Something went wrong");
+      return;
+    }
+    return res.json();
+  })
   .then((data) => {
     console.log(data);
     data.products.map((product) => {
@@ -102,7 +108,8 @@ fetch(baseURL + "products")
     //   }),
     // );
     productPageFunc();
-  });
+  })
+  .catch((err) => console.log(err));
 
 // const getAllProducts = async () => {
 //   const products = await fetch(baseURL + "products");
@@ -149,7 +156,13 @@ function productPageFunc() {
     card.addEventListener("click", (e) => {
       let id = card.dataset.val;
       fetch(baseURL + "products/" + id)
-        .then((data) => data.json())
+        .then((res) => {
+          if (!res.ok) {
+            alert("Something went wrong");
+            return;
+          }
+          return res.json();
+        })
         .then((data) => {
           console.log(data);
           let imageContainer = document.createElement("div");
@@ -212,7 +225,8 @@ function productPageFunc() {
                 console.log(res);
               });
           });
-        });
+        })
+        .catch((err) => console.log(err));
     }),
   );
 }

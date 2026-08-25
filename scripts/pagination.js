@@ -4,7 +4,13 @@ pg.forEach((li) => {
     let pageAnchor = e.target;
     let pageNum = pageAnchor.textContent;
     fetch(baseURL + "products/?limit=30&skip=" + (pageNum - 1) * 30)
-      .then((data) => data.json())
+      .then((res) => {
+        if (!res.ok) {
+          alert("Something went wrong");
+          return;
+        }
+        return res.json();
+      })
       .then((data) => {
         container.replaceChildren();
         data.products.map((product) => {
@@ -28,6 +34,7 @@ pg.forEach((li) => {
       })
       .then(() => {
         productPageFunc();
-      });
+      })
+      .catch((err) => console.log(err));
   });
 });

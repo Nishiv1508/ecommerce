@@ -4,7 +4,13 @@ category.addEventListener("click", async () => {
   //   const data = await categories.json();
   //   console.log(data);
   fetch(baseURL + "products/categories")
-    .then((data) => data.json())
+    .then((res) => {
+      if (!res.ok) {
+        alert("Something went wrong");
+        return;
+      }
+      return res.json();
+    })
     .then((data) => {
       container.style.display = "none";
       container2.style.display = "none";
@@ -35,7 +41,13 @@ category.addEventListener("click", async () => {
       cCards.forEach((card) => {
         card.addEventListener("click", () => {
           fetch(card.dataset.api)
-            .then((data) => data.json())
+            .then((res) => {
+              if (!res.ok) {
+                alert("Something went wrong");
+                return;
+              }
+              return res.json();
+            })
             .then((data) => {
               container2.style.display = "none";
               pagination.classList.add("hide");
@@ -65,8 +77,10 @@ category.addEventListener("click", async () => {
             })
             .then(() => {
               productPageFunc();
-            });
+            })
+            .catch((err) => console.log(err));
         });
       });
-    });
+    })
+    .catch((err) => console.log(err));
 });

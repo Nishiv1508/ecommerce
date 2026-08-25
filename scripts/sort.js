@@ -8,7 +8,13 @@ function getDataByOrder(filter, type) {
   pagination.classList.remove("hide");
   container.replaceChildren();
   fetch(baseURL + `products?sortBy=${filter}&order=${type}`)
-    .then((data) => data.json())
+    .then((res) => {
+      if (!res.ok) {
+        alert("Something went wrong");
+        return;
+      }
+      return res.json();
+    })
     .then((data) => {
       console.log(data);
       data.products.map((product) => {
@@ -41,7 +47,13 @@ function getDataByOrder(filter, type) {
               `products/?sortBy=${filter}&order=${type}&limit=30&skip=` +
               (pageNum - 1) * 30,
           )
-            .then((data) => data.json())
+            .then((res) => {
+              if (!res.ok) {
+                alert("Something went wrong");
+                return;
+              }
+              return res.json();
+            })
             .then((data) => {
               container.replaceChildren();
               data.products.map((product) => {
@@ -65,13 +77,15 @@ function getDataByOrder(filter, type) {
             })
             .then(() => {
               productPageFunc();
-            });
+            })
+            .catch((err) => console.log(err));
         });
       });
     })
     .then(() => {
       productPageFunc();
-    });
+    })
+    .catch((err) => console.log(err));
 }
 
 document.querySelector(".title-asc").addEventListener("click", () => {
