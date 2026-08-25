@@ -11,11 +11,13 @@ const container3 = document.createElement("div");
 const container4 = document.createElement("div");
 const container5 = document.createElement("div");
 const productPage = document.createElement("div");
+const productForm = document.createElement("div");
 container2.style.display = "none";
 container3.style.display = "none";
 container4.style.display = "none";
 container5.style.display = "none";
 productPage.style.display = "none";
+productForm.style.display = "none";
 
 section.appendChild(container);
 container.classList.add("container");
@@ -134,6 +136,7 @@ home.addEventListener("click", () => {
   container2.style.display = "none";
   container3.style.display = "none";
   productPage.style.display = "none";
+  productForm.style.display = "none";
   pagination.classList.remove("hide");
 
   container.style.display = "flex";
@@ -165,6 +168,7 @@ function productPageFunc() {
           container3.style.display = "none";
           container4.style.display = "none";
           container5.style.display = "none";
+          productForm.style.display = "none";
           pagination.classList.add("hide");
           productPage.style.display = "flex";
           productPage.style.height = "80%";

@@ -27,6 +27,7 @@ function handleChange(e) {
               container4.style.display = "none";
               container5.style.display = "none";
               productPage.style.display = "none";
+              productForm.style.display = "none";
               pagination.classList.add("hide");
               container2.style.display = "flex";
               container2.style.flexWrap = "wrap";

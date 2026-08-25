@@ -41,3 +41,14 @@
   border: 1px solid blue;
   margin: 0;
 }
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 40%;
+}
+
+.input-ele {
+  width: 200px;
+}

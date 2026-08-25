@@ -10,6 +10,7 @@ category.addEventListener("click", async () => {
       container2.style.display = "none";
       pagination.classList.add("hide");
       productPage.style.display = "none";
+      productForm.style.display = "none";
       container3.style.display = "flex";
       container3.style.flexWrap = "wrap";
       container3.style.gap = "10%";
